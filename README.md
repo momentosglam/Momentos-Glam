@@ -1,2 +1,2 @@
 # Momentos-Glam
-pagina web arriendo servicios
+Experiencias inolvidables para tus Eventos
