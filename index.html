@@ -1,0 +1,1162 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Momentos Glam — Experiencias para celebraciones</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --negro: #0D0C0E;
+    --dorado: #C9A84C;
+    --dorado-claro: #E8C97A;
+    --dorado-opaco: rgba(201,168,76,0.15);
+    --crema: #F5F0E8;
+    --gris: #7A7670;
+    --blanco: #FDFCF9;
+    --bordeaux: #2C1A1A;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--negro);
+    color: var(--crema);
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.2rem 4%;
+    background: rgba(13,12,14,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 0.5px solid rgba(201,168,76,0.2);
+  }
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem; font-weight: 300; letter-spacing: 0.12em;
+    color: var(--dorado); text-decoration: none;
+  }
+  .nav-logo span { font-style: italic; }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--crema); text-decoration: none; opacity: 0.7;
+    transition: opacity 0.2s;
+  }
+  .nav-links a:hover { opacity: 1; color: var(--dorado); }
+  .nav-cta {
+    font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase;
+    padding: 0.55rem 1.4rem; border: 1px solid var(--dorado);
+    color: var(--dorado); text-decoration: none;
+    transition: all 0.25s;
+  }
+  .nav-cta:hover { background: var(--dorado); color: var(--negro); }
+  .nav-burger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
+  .nav-burger span { display: block; width: 22px; height: 1.5px; background: var(--crema); transition: all 0.3s; }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    padding: 6rem 4% 4rem;
+    position: relative; overflow: hidden; text-align: center;
+  }
+  .hero-bg {
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 80% 60% at 50% 40%, rgba(201,168,76,0.08) 0%, transparent 70%),
+                radial-gradient(ellipse 40% 40% at 20% 80%, rgba(201,168,76,0.05) 0%, transparent 60%);
+  }
+  .hero-line {
+    display: block; width: 1px; height: 60px; background: var(--dorado);
+    margin: 0 auto 2rem; opacity: 0.5;
+    animation: fadeDown 1s ease both;
+  }
+  .hero-eyebrow {
+    font-size: 0.72rem; letter-spacing: 0.25em; text-transform: uppercase;
+    color: var(--dorado); margin-bottom: 1.5rem;
+    animation: fadeUp 0.8s ease 0.2s both;
+  }
+  .hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3rem, 10vw, 7.5rem);
+    font-weight: 300; line-height: 0.92;
+    letter-spacing: -0.01em;
+    animation: fadeUp 0.9s ease 0.35s both;
+  }
+  .hero-title em {
+    font-style: italic; color: var(--dorado);
+    display: block;
+  }
+  .hero-sub {
+    max-width: 480px; margin: 2rem auto 3rem;
+    font-size: 1rem; font-weight: 300; line-height: 1.7;
+    color: rgba(245,240,232,0.65);
+    animation: fadeUp 0.9s ease 0.5s both;
+  }
+  .hero-ctas {
+    display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center;
+    animation: fadeUp 0.9s ease 0.65s both;
+  }
+  .btn-primary {
+    padding: 0.85rem 2.5rem; background: var(--dorado); color: var(--negro);
+    font-size: 0.82rem; letter-spacing: 0.12em; text-transform: uppercase;
+    font-weight: 500; text-decoration: none; border: none; cursor: pointer;
+    transition: all 0.25s; display: inline-block;
+  }
+  .btn-primary:hover { background: var(--dorado-claro); transform: translateY(-1px); }
+  .btn-ghost {
+    padding: 0.85rem 2.5rem; background: transparent;
+    border: 1px solid rgba(245,240,232,0.3); color: var(--crema);
+    font-size: 0.82rem; letter-spacing: 0.12em; text-transform: uppercase;
+    text-decoration: none; transition: all 0.25s; display: inline-block;
+  }
+  .btn-ghost:hover { border-color: var(--dorado); color: var(--dorado); }
+
+  /* scroll indicator */
+  .hero-scroll {
+    position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%);
+    display: flex; flex-direction: column; align-items: center; gap: 6px;
+    opacity: 0.4; animation: fadeIn 1s ease 1.2s both;
+  }
+  .hero-scroll span { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; }
+  .hero-scroll::after {
+    content: ''; display: block; width: 1px; height: 40px;
+    background: var(--crema);
+    animation: scrollLine 1.8s ease infinite;
+  }
+
+  /* ── SECCIÓN GENÉRICA ── */
+  section { padding: 6rem 4%; }
+  .section-tag {
+    font-size: 0.7rem; letter-spacing: 0.25em; text-transform: uppercase;
+    color: var(--dorado); margin-bottom: 1rem; display: block;
+  }
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 300; line-height: 1.1; margin-bottom: 1.5rem;
+  }
+  .section-title em { font-style: italic; color: var(--dorado); }
+  .section-desc {
+    font-size: 1rem; font-weight: 300; line-height: 1.8;
+    color: rgba(245,240,232,0.6); max-width: 480px;
+  }
+
+  /* ── SERVICIOS ── */
+  #servicios { background: rgba(255,255,255,0.015); }
+  .servicios-header { text-align: center; max-width: 600px; margin: 0 auto 4rem; }
+  .servicios-header .section-desc { max-width: 100%; }
+  .servicios-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5px; background: rgba(201,168,76,0.15);
+    max-width: 1100px; margin: 0 auto;
+  }
+  .servicio-card {
+    background: var(--negro); padding: 3rem 2.5rem;
+    position: relative; overflow: hidden;
+    transition: background 0.3s;
+  }
+  .servicio-card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0;
+    height: 1px; background: var(--dorado); opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .servicio-card:hover { background: rgba(201,168,76,0.04); }
+  .servicio-card:hover::before { opacity: 1; }
+  .servicio-icon {
+    font-size: 2rem; margin-bottom: 1.5rem; display: block;
+  }
+  .servicio-nombre {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.8rem; font-weight: 300; margin-bottom: 1rem;
+    line-height: 1.1;
+  }
+  .servicio-nombre em { font-style: italic; color: var(--dorado); }
+  .servicio-desc {
+    font-size: 0.9rem; font-weight: 300; line-height: 1.8;
+    color: rgba(245,240,232,0.55); margin-bottom: 1.5rem;
+  }
+  .servicio-includes {
+    list-style: none; display: flex; flex-direction: column; gap: 0.5rem;
+  }
+  .servicio-includes li {
+    font-size: 0.8rem; letter-spacing: 0.05em;
+    color: rgba(245,240,232,0.5);
+    display: flex; align-items: center; gap: 0.5rem;
+  }
+  .servicio-includes li::before {
+    content: '—'; color: var(--dorado); font-size: 0.7rem;
+  }
+  .servicio-tag-coming {
+    display: inline-block; margin-top: 1.5rem;
+    font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase;
+    padding: 0.3rem 0.8rem; border: 1px solid rgba(201,168,76,0.4);
+    color: var(--dorado);
+  }
+
+  /* ── CÓMO FUNCIONA ── */
+  #como-funciona { max-width: 900px; margin: 0 auto; }
+  .pasos-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 3.5rem; }
+  .paso {
+    display: flex; gap: 1.5rem; align-items: flex-start;
+    padding: 2rem; border: 0.5px solid rgba(201,168,76,0.15);
+    transition: border-color 0.3s;
+  }
+  .paso:hover { border-color: rgba(201,168,76,0.4); }
+  .paso-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.5rem; font-weight: 300; color: var(--dorado);
+    line-height: 1; flex-shrink: 0; opacity: 0.5;
+  }
+  .paso-content h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem; font-weight: 400; margin-bottom: 0.5rem;
+  }
+  .paso-content p {
+    font-size: 0.88rem; line-height: 1.7;
+    color: rgba(245,240,232,0.55);
+  }
+
+  /* ── PARA QUIEN ── */
+  #para-quien {
+    background: var(--dorado-opaco);
+    border-top: 0.5px solid rgba(201,168,76,0.15);
+    border-bottom: 0.5px solid rgba(201,168,76,0.15);
+  }
+  .para-quien-inner {
+    max-width: 1100px; margin: 0 auto;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center;
+  }
+  .eventos-lista {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 2rem;
+  }
+  .evento-item {
+    padding: 1.2rem 1.5rem;
+    border: 0.5px solid rgba(201,168,76,0.2);
+    font-size: 0.88rem; font-weight: 300;
+    display: flex; align-items: center; gap: 0.8rem;
+    transition: all 0.25s;
+  }
+  .evento-item:hover { border-color: var(--dorado); color: var(--dorado); }
+  .evento-item span { font-size: 1.1rem; }
+
+  /* ── POR QUÉ ELEGIRNOS ── */
+  .diferencias-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 2rem; margin-top: 3rem; max-width: 1100px;
+  }
+  .diferencia {
+    padding: 2rem 0; border-top: 1px solid rgba(201,168,76,0.25);
+  }
+  .diferencia h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem; margin-bottom: 0.8rem; font-weight: 400;
+  }
+  .diferencia p {
+    font-size: 0.88rem; line-height: 1.75;
+    color: rgba(245,240,232,0.5);
+  }
+
+  /* ── QUOTE HIGHLIGHT ── */
+  .quote-section {
+    padding: 5rem 4%; text-align: center;
+    background: linear-gradient(180deg, transparent, rgba(201,168,76,0.04), transparent);
+  }
+  .quote-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.6rem, 4vw, 2.8rem);
+    font-weight: 300; font-style: italic;
+    line-height: 1.4; max-width: 700px; margin: 0 auto;
+    color: var(--crema);
+  }
+  .quote-text em { color: var(--dorado); }
+
+  /* ── CONTACTO ── */
+  #contacto {
+    background: var(--bordeaux);
+    border-top: 0.5px solid rgba(201,168,76,0.2);
+  }
+  .contacto-inner {
+    max-width: 1100px; margin: 0 auto;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start;
+  }
+  .contacto-info h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 4vw, 3rem); font-weight: 300;
+    line-height: 1.1; margin-bottom: 1.5rem;
+  }
+  .contacto-info h2 em { font-style: italic; color: var(--dorado); }
+  .contacto-info p {
+    font-size: 0.95rem; line-height: 1.8; color: rgba(245,240,232,0.6);
+    margin-bottom: 2rem;
+  }
+  .contacto-datos { display: flex; flex-direction: column; gap: 1rem; }
+  .dato {
+    display: flex; align-items: center; gap: 1rem;
+    font-size: 0.9rem; color: rgba(245,240,232,0.7);
+  }
+  .dato-icon { font-size: 1.1rem; width: 20px; text-align: center; }
+  .dato a { color: var(--dorado); text-decoration: none; }
+  .dato a:hover { text-decoration: underline; }
+
+  /* form */
+  .contacto-form { display: flex; flex-direction: column; gap: 1rem; }
+  .form-group { display: flex; flex-direction: column; gap: 0.4rem; }
+  .form-group label {
+    font-size: 0.72rem; letter-spacing: 0.15em; text-transform: uppercase;
+    color: rgba(245,240,232,0.5);
+  }
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    background: rgba(255,255,255,0.04);
+    border: 0.5px solid rgba(201,168,76,0.25);
+    color: var(--crema); padding: 0.85rem 1rem;
+    font-family: 'DM Sans', sans-serif; font-size: 0.9rem;
+    outline: none; transition: border-color 0.2s;
+    width: 100%;
+  }
+  .form-group input::placeholder,
+  .form-group textarea::placeholder { color: rgba(245,240,232,0.25); }
+  .form-group input:focus,
+  .form-group select:focus,
+  .form-group textarea:focus { border-color: var(--dorado); }
+  .form-group select { appearance: none; cursor: pointer; }
+  .form-group select option { background: var(--bordeaux); }
+  .form-group textarea { resize: vertical; min-height: 100px; }
+  .btn-submit {
+    padding: 1rem 2.5rem; background: var(--dorado); color: var(--negro);
+    font-size: 0.82rem; letter-spacing: 0.12em; text-transform: uppercase;
+    font-weight: 500; border: none; cursor: pointer; margin-top: 0.5rem;
+    transition: all 0.25s; align-self: flex-start;
+  }
+  .btn-submit:hover { background: var(--dorado-claro); }
+
+  /* ── FOOTER ── */
+  footer {
+    padding: 2rem 4%; text-align: center;
+    border-top: 0.5px solid rgba(201,168,76,0.15);
+    font-size: 0.78rem; color: rgba(245,240,232,0.3);
+    letter-spacing: 0.05em;
+  }
+  footer a { color: var(--dorado); text-decoration: none; opacity: 0.7; margin: 0 0.5rem; }
+
+  /* ── DESCUENTO BANNER ── */
+  .descuento-banner {
+    background: var(--dorado); color: var(--negro);
+    padding: 0.7rem 4%; text-align: center;
+    font-size: 0.78rem; font-weight: 500; letter-spacing: 0.1em;
+  }
+  .descuento-banner a { color: var(--negro); text-decoration: underline; cursor: pointer; }
+
+  /* ── SOCIAL FLOAT ── */
+  .social-float {
+    position: fixed; right: 1.5rem; bottom: 2rem; z-index: 50;
+    display: flex; flex-direction: column; gap: 0.6rem;
+  }
+  .social-btn {
+    width: 42px; height: 42px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    text-decoration: none; font-size: 1.1rem; transition: transform 0.2s;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.4);
+  }
+  .social-btn:hover { transform: scale(1.1); }
+  .social-btn.wa { background: #25D366; }
+  .social-btn.ig { background: linear-gradient(135deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeDown {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 0.5; transform: translateY(0); }
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; } to { opacity: 0.4; }
+  }
+  @keyframes scrollLine {
+    0% { transform: scaleY(0); transform-origin: top; }
+    50% { transform: scaleY(1); transform-origin: top; }
+    51% { transform: scaleY(1); transform-origin: bottom; }
+    100% { transform: scaleY(0); transform-origin: bottom; }
+  }
+
+  /* reveal on scroll */
+  .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .reveal.visible { opacity: 1; transform: none; }
+
+  /* ── FAQ ── */
+  #faq { border-top: 0.5px solid rgba(201,168,76,0.15); }
+  .faq-lista { display: flex; flex-direction: column; }
+  .faq-item { border-bottom: 0.5px solid rgba(201,168,76,0.15); }
+  .faq-pregunta {
+    width: 100%; display: flex; justify-content: space-between; align-items: center;
+    padding: 1.3rem 0; background: transparent; border: none; cursor: pointer;
+    font-family: 'DM Sans', sans-serif; font-size: 1rem; font-weight: 400;
+    color: var(--crema); text-align: left; gap: 1rem;
+    transition: color 0.2s;
+  }
+  .faq-pregunta:hover { color: var(--dorado); }
+  .faq-pregunta.abierta { color: var(--dorado); }
+  .faq-icono {
+    font-size: 1.4rem; font-weight: 300; color: var(--dorado);
+    flex-shrink: 0; transition: transform 0.3s; line-height: 1;
+  }
+  .faq-pregunta.abierta .faq-icono { transform: rotate(45deg); }
+  .faq-respuesta {
+    max-height: 0; overflow: hidden;
+    transition: max-height 0.4s ease, padding 0.3s ease;
+  }
+  .faq-respuesta.abierta { max-height: 300px; padding-bottom: 1.2rem; }
+  .faq-respuesta p {
+    font-size: 0.9rem; line-height: 1.8;
+    color: rgba(245,240,232,0.6);
+  }
+
+  /* ── PRECIOS ── */
+  .precios-grid {
+    display: grid; grid-template-columns: repeat(3,1fr);
+    gap: 1px; background: rgba(201,168,76,0.15);
+    margin-bottom: 2rem;
+  }
+  .precio-card {
+    background: var(--negro); padding: 2rem 1.5rem;
+    display: flex; flex-direction: column; align-items: center;
+    text-align: center; position: relative;
+    transition: background 0.3s;
+  }
+  .precio-card:hover { background: rgba(201,168,76,0.04); }
+  .precio-destacado {
+    background: rgba(201,168,76,0.06);
+    border-top: 2px solid var(--dorado);
+  }
+  .precio-badge {
+    font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase;
+    background: var(--dorado); color: var(--negro);
+    padding: 0.25rem 0.8rem; margin-bottom: 1rem; font-weight: 500;
+  }
+  .precio-horas {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem; font-style: italic; color: var(--dorado);
+    margin-bottom: 0.8rem;
+  }
+  .precio-valor {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3.5rem; font-weight: 300; line-height: 1;
+    color: var(--crema); margin-bottom: 0.5rem;
+  }
+  .precio-mil { font-size: 1.8rem; }
+  .precio-hora-val {
+    font-size: 0.8rem; color: var(--dorado); margin-bottom: 0.5rem;
+  }
+  .precio-nota {
+    font-size: 0.78rem; color: rgba(245,240,232,0.4);
+    margin-bottom: 1.5rem; line-height: 1.5;
+  }
+  .btn-reservar {
+    display: inline-block; width: 100%;
+    padding: 0.75rem 1rem; background: var(--dorado); color: var(--negro);
+    font-size: 0.78rem; font-weight: 500; letter-spacing: 0.08em;
+    text-transform: uppercase; text-decoration: none;
+    transition: all 0.25s; margin-top: auto;
+  }
+  .btn-reservar:hover { background: var(--dorado-claro); }
+  .incluye-wrap {
+    border: 0.5px solid rgba(201,168,76,0.15);
+    padding: 1.5rem 2rem;
+  }
+  .incluye-titulo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem; font-style: italic; color: var(--dorado);
+    text-align: center; margin-bottom: 1.2rem;
+  }
+  .incluye-grid {
+    display: grid; grid-template-columns: repeat(3,1fr); gap: 0.6rem 2rem;
+  }
+  .incluye-item {
+    font-size: 0.83rem; color: rgba(245,240,232,0.6);
+    display: flex; align-items: center; gap: 0.5rem;
+  }
+  .incluye-item span { color: var(--dorado); font-size: 0.6rem; }
+  .vintage-precio-box {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 0.9rem 1.2rem;
+    border: 0.5px solid rgba(201,168,76,0.2);
+    font-size: 0.88rem; color: rgba(245,240,232,0.65);
+  }
+  .vintage-precio-box strong { color: var(--dorado); font-size: 1.1rem; font-weight: 400; }
+  .combo-row {
+    display: flex; justify-content: space-between;
+    font-size: 0.85rem; color: rgba(245,240,232,0.55);
+    padding: 0.4rem 0; border-bottom: 0.5px solid rgba(201,168,76,0.1);
+  }
+  .combo-dest { color: var(--crema); }
+  .combo-dest strong { color: var(--dorado); }
+  .combo-row strong { color: rgba(245,240,232,0.8); font-weight: 400; }
+
+  @media (max-width: 768px) {
+    .precios-grid { grid-template-columns: 1fr; }
+    .incluye-grid { grid-template-columns: 1fr 1fr; }
+  }
+
+  /* ── AGENDA & PAGO ── */
+  #agenda {
+    background: linear-gradient(180deg, rgba(201,168,76,0.04) 0%, transparent 100%);
+    border-top: 0.5px solid rgba(201,168,76,0.15);
+    border-bottom: 0.5px solid rgba(201,168,76,0.15);
+  }
+  .agenda-inner {
+    max-width: 1100px; margin: 0 auto;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start;
+  }
+  .agenda-left h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.8rem, 3.5vw, 2.8rem); font-weight: 300; line-height: 1.15;
+    margin-bottom: 1rem;
+  }
+  .agenda-left h2 em { font-style: italic; color: var(--dorado); }
+  .agenda-left p {
+    font-size: 0.92rem; line-height: 1.8; color: rgba(245,240,232,0.6);
+    margin-bottom: 2rem;
+  }
+  .agenda-pasos { display: flex; flex-direction: column; gap: 1rem; margin-bottom: 2rem; }
+  .agenda-paso {
+    display: flex; align-items: flex-start; gap: 1rem;
+    font-size: 0.88rem; line-height: 1.6; color: rgba(245,240,232,0.65);
+  }
+  .agenda-paso-num {
+    width: 24px; height: 24px; border-radius: 50%;
+    border: 1px solid var(--dorado); color: var(--dorado);
+    font-size: 0.72rem; display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; margin-top: 1px;
+  }
+  .btn-agendar {
+    display: inline-flex; align-items: center; gap: 0.6rem;
+    padding: 0.9rem 2rem; background: transparent;
+    border: 1px solid var(--dorado); color: var(--dorado);
+    font-size: 0.82rem; letter-spacing: 0.1em; text-transform: uppercase;
+    text-decoration: none; transition: all 0.25s; cursor: pointer;
+  }
+  .btn-agendar:hover { background: var(--dorado); color: var(--negro); }
+  .calendario-embed {
+    border: 0.5px solid rgba(201,168,76,0.2);
+    overflow: hidden; background: rgba(255,255,255,0.02);
+  }
+  .calendario-embed iframe {
+    display: block; width: 100%; border: none;
+    filter: invert(0.9) hue-rotate(180deg) saturate(0.3) brightness(0.85);
+  }
+  .pago-strip {
+    margin-top: 2rem; padding: 1.5rem;
+    border: 0.5px solid rgba(201,168,76,0.2);
+    background: rgba(201,168,76,0.03);
+  }
+  .pago-strip-title {
+    font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--dorado); margin-bottom: 0.8rem; display: block;
+  }
+  .pago-strip p {
+    font-size: 0.85rem; line-height: 1.7; color: rgba(245,240,232,0.55);
+    margin-bottom: 1.2rem;
+  }
+  .btn-mp {
+    display: inline-flex; align-items: center; gap: 0.7rem;
+    padding: 0.85rem 1.8rem; background: #009EE3; color: #fff;
+    font-size: 0.82rem; font-weight: 500; letter-spacing: 0.05em;
+    text-decoration: none; border: none; cursor: pointer;
+    transition: all 0.25s;
+  }
+  .btn-mp:hover { background: #0080B8; transform: translateY(-1px); }
+  .mp-logo { font-size: 1rem; }
+  .pago-nota {
+    margin-top: 0.8rem; font-size: 0.75rem;
+    color: rgba(245,240,232,0.35); display: flex; align-items: center; gap: 0.4rem;
+  }
+
+  /* mini agenda inline en contacto */
+  .contacto-agenda-mini {
+    margin-top: 2rem; padding-top: 1.5rem;
+    border-top: 0.5px solid rgba(201,168,76,0.15);
+  }
+  .contacto-agenda-mini p {
+    font-size: 0.85rem; color: rgba(245,240,232,0.5); margin-bottom: 1rem; line-height: 1.6;
+  }
+  .contacto-pago-mini {
+    margin-top: 1.2rem; display: flex; flex-direction: column; gap: 0.6rem;
+  }
+
+  /* ── MOBILE ── */
+  @media (max-width: 768px) {
+    .nav-links, .nav-cta { display: none; }
+    .nav-burger { display: flex; }
+    .nav-links.open {
+      display: flex; flex-direction: column; gap: 0;
+      position: absolute; top: 100%; left: 0; right: 0;
+      background: rgba(13,12,14,0.98); padding: 1rem 4%;
+    }
+    .nav-links.open a { padding: 0.8rem 0; border-bottom: 0.5px solid rgba(255,255,255,0.05); }
+
+    .pasos-wrap { grid-template-columns: 1fr; }
+    .para-quien-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+    .diferencias-grid { grid-template-columns: 1fr; }
+    .contacto-inner { grid-template-columns: 1fr; gap: 3rem; }
+    .eventos-lista { grid-template-columns: 1fr; }
+    .agenda-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- BANNER DESCUENTO -->
+<div class="descuento-banner">
+  ✨ Responde nuestra encuesta y obtén un descuento especial para tu evento.
+  <a href="https://forms.google.com" target="_blank">Participar aquí →</a>
+</div>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">Momentos <span>Glam</span></a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#servicios">Servicios</a></li>
+    <li><a href="#como-funciona">Cómo funciona</a></li>
+    <li><a href="#agenda">Agendar</a></li>
+    <li><a href="#faq">FAQ</a></li>
+    <li><a href="#contacto">Contacto</a></li>
+  </ul>
+  <a href="#contacto" class="nav-cta">Cotizar</a>
+  <div class="nav-burger" id="burger" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <span class="hero-line"></span>
+  <p class="hero-eyebrow">Experiencias para celebraciones únicas</p>
+  <h1 class="hero-title">
+    Captura<br>
+    <em>el momento</em><br>
+    perfecto
+  </h1>
+  <p class="hero-sub">Cámara 360° y teléfono vintage para hacer de tu fiesta, boda o celebración algo que tus invitados no van a olvidar.</p>
+  <div class="hero-ctas">
+    <a href="#servicios" class="btn-primary">Ver servicios</a>
+    <a href="#contacto" class="btn-ghost">Cotizar ahora</a>
+  </div>
+  <div class="hero-scroll"><span>Scroll</span></div>
+</section>
+
+<!-- SERVICIOS -->
+<section id="servicios">
+  <div class="servicios-header reveal">
+    <span class="section-tag">Nuestros servicios</span>
+    <h2 class="section-title">Experiencias que se <em>quedan</em></h2>
+    <p class="section-desc">Dos servicios únicos diseñados para crear recuerdos memorables. Mientras más horas reserves, mejor es tu valor por hora.</p>
+  </div>
+
+  <!-- CÁMARA 360° -->
+  <div style="max-width:1100px; margin:0 auto 3rem;">
+    <div class="reveal" style="margin-bottom:1.5rem;">
+      <span class="section-tag">🔄 Cámara 360° Aérea Inclusiva</span>
+      <h3 style="font-family:'Cormorant Garamond',serif; font-size:clamp(1.6rem,3vw,2.4rem); font-weight:300; margin-bottom:0.5rem;">Elige tu <em style="color:var(--dorado);font-style:italic;">tiempo</em>, no tu límite</h3>
+      <p style="font-size:0.9rem; color:rgba(245,240,232,0.55); margin-bottom:2rem;">La experiencia más viral del momento. Video en cámara lenta 360°, listo para compartir al instante.</p>
+    </div>
+    <div class="precios-grid reveal">
+      <div class="precio-card">
+        <span class="precio-horas">2 horas</span>
+        <div class="precio-valor">$160<span class="precio-mil">.000</span></div>
+        <span class="precio-hora-val">$80.000 / hora</span>
+        <p class="precio-nota">Ideal para eventos breves</p>
+        <a href="https://mpago.la/17KLqez" target="_blank" class="btn-reservar">Reservar — $20.000</a>
+      </div>
+      <div class="precio-card precio-destacado">
+        <span class="precio-badge">MÁS ELEGIDO</span>
+        <span class="precio-horas">3 horas</span>
+        <div class="precio-valor">$210<span class="precio-mil">.000</span></div>
+        <span class="precio-hora-val">$70.000 / hora</span>
+        <p class="precio-nota">Ahorras $30.000 vs. hora extra</p>
+        <a href="https://mpago.la/17KLqez" target="_blank" class="btn-reservar">Reservar — $20.000</a>
+      </div>
+      <div class="precio-card">
+        <span class="precio-horas">4 horas</span>
+        <div class="precio-valor">$250<span class="precio-mil">.000</span></div>
+        <span class="precio-hora-val">$62.500 / hora</span>
+        <p class="precio-nota">Ahorras $70.000 vs. hora extra</p>
+        <a href="https://mpago.la/17KLqez" target="_blank" class="btn-reservar">Reservar — $20.000</a>
+      </div>
+    </div>
+    <!-- INCLUYE -->
+    <div class="incluye-wrap reveal">
+      <p class="incluye-titulo">Todos los paquetes incluyen</p>
+      <div class="incluye-grid">
+        <div class="incluye-item"><span>✦</span> Videos ilimitados</div>
+        <div class="incluye-item"><span>✦</span> Envío inmediato a invitados</div>
+        <div class="incluye-item"><span>✦</span> Link con todo el evento</div>
+        <div class="incluye-item"><span>✦</span> Código QR de descarga</div>
+        <div class="incluye-item"><span>✦</span> Proyección en pantalla en vivo</div>
+        <div class="incluye-item"><span>✦</span> Personal a cargo del equipo</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TELÉFONO VINTAGE -->
+  <div style="max-width:1100px; margin:0 auto;" class="reveal">
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:3rem; align-items:center; border:0.5px solid rgba(201,168,76,0.2); padding:2.5rem;">
+      <div>
+        <span class="section-tag">☎️ Audio Guestbook</span>
+        <h3 style="font-family:'Cormorant Garamond',serif; font-size:clamp(1.5rem,2.5vw,2.2rem); font-weight:300; line-height:1.15; margin-bottom:1rem;">El teléfono <em style="color:var(--dorado);font-style:italic;">vintage</em> que guarda voces para siempre</h3>
+        <p style="font-size:0.88rem; line-height:1.8; color:rgba(245,240,232,0.55); margin-bottom:1.5rem;">Tus invitados levantan el auricular y dejan un mensaje de voz para el anfitrión: risas, consejos, buenos deseos. Un recuerdo sonoro que ninguna foto puede capturar.</p>
+        <ul class="servicio-includes">
+          <li>Mensajes de voz ilimitados</li>
+          <li>Audio descargable al finalizar</li>
+          <li>Diseño retro que decora el evento</li>
+          <li>Sin límite de mensajes</li>
+        </ul>
+      </div>
+      <div style="display:flex; flex-direction:column; gap:1rem;">
+        <div class="vintage-precio-box">
+          <span>Agregado a tu paquete cámara 360°</span>
+          <strong>+ $40.000</strong>
+        </div>
+        <div class="vintage-precio-box">
+          <span>Como servicio único</span>
+          <strong>$60.000</strong>
+        </div>
+        <a href="https://mpago.la/27XuBd4" target="_blank" class="btn-reservar" style="text-align:center; margin-top:0.5rem;">Reservar — $20.000</a>
+        <!-- COMBO -->
+        <div style="border-top:0.5px solid rgba(201,168,76,0.2); padding-top:1rem; margin-top:0.5rem;">
+          <p style="font-family:'Cormorant Garamond',serif; font-size:1rem; font-style:italic; color:var(--dorado); margin-bottom:0.8rem;">Combo Cámara 360° + Audio Guestbook</p>
+          <div style="display:flex; flex-direction:column; gap:0.4rem;">
+            <div class="combo-row"><span>2 horas</span><strong>$200.000</strong></div>
+            <div class="combo-row combo-dest"><span>3 horas · más elegido ⭐</span><strong>$250.000</strong></div>
+            <div class="combo-row"><span>4 horas</span><strong>$290.000</strong></div>
+          </div>
+          <a href="https://mpago.la/2b7THMJ" target="_blank" class="btn-reservar" style="text-align:center; margin-top:1rem; display:block;">Reservar Pack — $20.000</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- QUOTE -->
+<div class="quote-section reveal">
+  <p class="quote-text">
+    "Los mejores recuerdos no se planean,<br>
+    <em>se capturan.</em>"
+  </p>
+</div>
+
+<!-- CÓMO FUNCIONA -->
+<section id="como-funciona">
+  <div style="max-width:900px; margin:0 auto;">
+    <div class="reveal">
+      <span class="section-tag">El proceso</span>
+      <h2 class="section-title">Simple y <em>sin complicaciones</em></h2>
+    </div>
+    <div class="pasos-wrap reveal">
+      <div class="paso">
+        <span class="paso-num">1</span>
+        <div class="paso-content">
+          <h3>Cotiza sin compromiso</h3>
+          <p>Escríbenos con la fecha y el tipo de evento. Te respondemos en menos de 24 horas con disponibilidad y precios.</p>
+        </div>
+      </div>
+      <div class="paso">
+        <span class="paso-num">2</span>
+        <div class="paso-content">
+          <h3>Confirmamos y personalizamos</h3>
+          <p>Reservas con anticipación. Coordinamos detalles de montaje y si necesitas personalización (logo, colores del evento), lo ajustamos.</p>
+        </div>
+      </div>
+      <div class="paso">
+        <span class="paso-num">3</span>
+        <div class="paso-content">
+          <h3>Llegamos a tu evento</h3>
+          <p>Nuestro equipo llega puntualmente, instala todo y se hace cargo durante el evento para que tú solo disfrutes.</p>
+        </div>
+      </div>
+      <div class="paso">
+        <span class="paso-num">4</span>
+        <div class="paso-content">
+          <h3>Recuerdos para siempre</h3>
+          <p>Al finalizar, recibes la galería digital y los audios del teléfono vintage. Listo para compartir y guardar.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PARA QUIÉN -->
+<section id="para-quien">
+  <div class="para-quien-inner">
+    <div class="reveal">
+      <span class="section-tag">¿Para qué eventos?</span>
+      <h2 class="section-title">Perfecto para <em>cualquier celebración</em></h2>
+      <p class="section-desc">Si tienes una razón para celebrar, nosotros tenemos la experiencia para hacerla inolvidable.</p>
+    </div>
+    <div class="reveal">
+      <div class="eventos-lista">
+        <div class="evento-item"><span>💍</span> Matrimonios</div>
+        <div class="evento-item"><span>🎂</span> Cumpleaños</div>
+        <div class="evento-item"><span>👑</span> Quinceañeros</div>
+        <div class="evento-item"><span>👶</span> Baby Shower</div>
+        <div class="evento-item"><span>🎓</span> Graduaciones</div>
+        <div class="evento-item"><span>🏢</span> Corporativos</div>
+        <div class="evento-item"><span>💃</span> Despedidas</div>
+        <div class="evento-item"><span>🎉</span> Fiestas Temáticas</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- POR QUÉ ELEGIRNOS -->
+<section id="por-que">
+  <div style="max-width:1100px; margin:0 auto;">
+    <div class="reveal">
+      <span class="section-tag">¿Por qué Momentos Glam?</span>
+      <h2 class="section-title">La diferencia <em>que se nota</em></h2>
+    </div>
+    <div class="diferencias-grid reveal">
+      <div class="diferencia">
+        <h3>Experiencia inmediata</h3>
+        <p>Tus invitados tienen el video o audio en sus manos al instante. Sin esperas, sin correos posteriores.</p>
+      </div>
+      <div class="diferencia">
+        <h3>Atención personalizada</h3>
+        <p>Cada evento es único. Coordinamos contigo todos los detalles para que el servicio encaje perfectamente en tu celebración.</p>
+      </div>
+      <div class="diferencia">
+        <h3>Operador incluido</h3>
+        <p>Un operador de Momentos Glam está presente durante todo el evento. Tú celebras, nosotros nos encargamos.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <div style="max-width:800px; margin:0 auto;">
+    <div class="reveal" style="text-align:center; margin-bottom:3rem;">
+      <span class="section-tag">Preguntas frecuentes</span>
+      <h2 class="section-title">Todo lo que necesitas <em>saber</em></h2>
+      <p class="section-desc" style="max-width:100%; text-align:center;">Resolvemos tus dudas antes de que las tengas.</p>
+    </div>
+    <div class="faq-lista reveal">
+
+      <div class="faq-item">
+        <button class="faq-pregunta" onclick="toggleFaq(this)">
+          ¿Cómo funciona la cámara 360°?
+          <span class="faq-icono">+</span>
+        </button>
+        <div class="faq-respuesta">
+          <p>Tus invitados se suben a la plataforma giratoria, hacen sus mejores poses y la cámara los graba en cámara lenta desde todos los ángulos. En segundos el video queda listo para compartir directo desde su celular vía WhatsApp, Instagram o como prefieran.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-pregunta" onclick="toggleFaq(this)">
+          ¿Cómo funciona el teléfono vintage?
+          <span class="faq-icono">+</span>
+        </button>
+        <div class="faq-respuesta">
+          <p>El teléfono se instala en una mesa decorada dentro del evento. Tus invitados levantan el auricular y graban un mensaje de voz: felicitaciones, anécdotas, consejos o lo que quieran decirle al festejado. Al terminar el evento te entregamos todos los audios descargables, un recuerdo que ninguna foto puede capturar.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-pregunta" onclick="toggleFaq(this)">
+          ¿Cuánto espacio se necesita para instalar los equipos?
+          <span class="faq-icono">+</span>
+        </button>
+        <div class="faq-respuesta">
+          <p>La cámara 360° necesita aproximadamente 3x3 metros para la plataforma y el brazo de la cámara. El teléfono vintage solo requiere una mesa pequeña de apoyo. Ambos equipos se adaptan a salones, jardines, terrazas y espacios al aire libre.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-pregunta" onclick="toggleFaq(this)">
+          ¿Qué pasa si mi evento dura más horas de las que contraté?
+          <span class="faq-icono">+</span>
+        </button>
+        <div class="faq-respuesta">
+          <p>Puedes coordinar horas adicionales directamente con nosotros el día del evento, sujeto a disponibilidad. El valor de hora adicional es de $80.000. Por eso recomendamos el plan de 3 o 4 horas si tu celebración es más larga, ya que el valor por hora es mejor.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-pregunta" onclick="toggleFaq(this)">
+          ¿Con cuánta anticipación debo reservar?
+          <span class="faq-icono">+</span>
+        </button>
+        <div class="faq-respuesta">
+          <p>Te recomendamos reservar con al menos 2 a 4 semanas de anticipación para asegurar la disponibilidad de tu fecha, especialmente en fines de semana. Para eventos en temporada alta (diciembre, marzo, junio) lo ideal es reservar con 1 a 2 meses de anticipación.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-pregunta" onclick="toggleFaq(this)">
+          ¿Cómo confirmo mi reserva?
+          <span class="faq-icono">+</span>
+        </button>
+        <div class="faq-respuesta">
+          <p>Para confirmar tu fecha necesitas pagar un anticipo de $20.000 a través de Mercado Pago (el botón está en cada servicio). El saldo restante se cancela el día del evento, antes de que instalemos el equipo. Los datos para transferencia bancaria los coordinamos por WhatsApp.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-pregunta" onclick="toggleFaq(this)">
+          ¿Puedo personalizar el servicio con el tema de mi evento?
+          <span class="faq-icono">+</span>
+        </button>
+        <div class="faq-respuesta">
+          <p>Sí. Podemos personalizar los videos de la cámara 360° con el nombre del evento, fecha o logo. Para el teléfono vintage podemos preparar una tarjeta de instrucciones con el diseño de tu celebración. Coordínalo con nosotros en la reunión de 15 minutos.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-pregunta" onclick="toggleFaq(this)">
+          ¿Los servicios funcionan en exteriores?
+          <span class="faq-icono">+</span>
+        </button>
+        <div class="faq-respuesta">
+          <p>Sí, ambos equipos funcionan en exteriores. Para la cámara 360° es importante que el lugar tenga iluminación suficiente y esté protegido del viento fuerte. El teléfono vintage requiere conexión eléctrica cercana. Cuéntanos el tipo de espacio al cotizar y te asesoramos.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-pregunta" onclick="toggleFaq(this)">
+          ¿Qué pasa si necesito cancelar?
+          <span class="faq-icono">+</span>
+        </button>
+        <div class="faq-respuesta">
+          <p>Si cancelas con más de 7 días de anticipación, el anticipo queda como crédito para reagendar. Si cancelas con menos de 7 días, el anticipo no es reembolsable. Siempre buscamos una solución flexible para nuestros clientes, escríbenos y lo conversamos.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- AGENDA & PAGO -->
+<section id="agenda">
+  <div class="agenda-inner">
+
+    <!-- LADO IZQUIERDO: texto + pasos + botón MP -->
+    <div class="agenda-left reveal">
+      <span class="section-tag">Reserva tu reunión</span>
+      <h2>Agenda una llamada de <em>15 minutos</em></h2>
+      <p>Sin compromiso. Conversamos los detalles de tu evento, resolvemos tus dudas y coordinamos todo para que tu celebración quede perfecta.</p>
+
+      <div class="agenda-pasos">
+        <div class="agenda-paso">
+          <span class="agenda-paso-num">1</span>
+          <span>Elige el día y hora que más te acomoda en el calendario.</span>
+        </div>
+        <div class="agenda-paso">
+          <span class="agenda-paso-num">2</span>
+          <span>Ingresa tu nombre y WhatsApp para confirmar la reunión.</span>
+        </div>
+        <div class="agenda-paso">
+          <span class="agenda-paso-num">3</span>
+          <span>Recibes confirmación automática y nos vemos en 15 minutos.</span>
+        </div>
+      </div>
+
+      <a href="https://calendar.app.google/pKxpgGgnyPkUzt7L8" target="_blank" class="btn-agendar">
+        📅 Agendar reunión gratuita
+      </a>
+
+      <!-- PAGO -->
+      <div class="pago-strip">
+        <span class="pago-strip-title">¿Ya decidiste? Reserva tu fecha</span>
+        <p>Para confirmar la disponibilidad de tu fecha, puedes abonar el anticipo directamente con Mercado Pago. Seguro, rápido y desde cualquier dispositivo.</p>
+        <a href="https://mpago.la/2b7THMJ" target="_blank" class="btn-mp">
+          <span class="mp-logo">💳</span> Pagar anticipo con Mercado Pago
+        </a>
+        <p class="pago-nota">🔒 Pago seguro procesado por Mercado Pago · Los datos bancarios se coordinan por WhatsApp</p>
+      </div>
+    </div>
+
+    <!-- LADO DERECHO: iframe del calendario -->
+    <div class="reveal">
+      <div class="calendario-embed">
+        <iframe
+          src="https://calendar.app.google/pKxpgGgnyPkUzt7L8"
+          width="100%"
+          height="520"
+          frameborder="0"
+          title="Agendar reunión Momentos Glam">
+        </iframe>
+      </div>
+      <p style="font-size:0.75rem; color:rgba(245,240,232,0.3); margin-top:0.8rem; text-align:center; letter-spacing:0.05em;">
+        Si el calendario no carga, <a href="https://calendar.app.google/pKxpgGgnyPkUzt7L8" target="_blank" style="color:var(--dorado);">haz clic aquí para abrir</a>
+      </p>
+    </div>
+
+  </div>
+</section>
+
+<!-- CONTACTO -->
+<section id="contacto">
+  <div class="contacto-inner">
+    <div class="contacto-info reveal">
+      <h2>¿Listo para crear un <em>Momento Glam</em>?</h2>
+      <p>Escríbenos con la fecha de tu evento y te respondemos con disponibilidad y presupuesto en menos de 24 horas.</p>
+      <div class="contacto-datos">
+        <div class="dato">
+          <span class="dato-icon">📱</span>
+          <span>WhatsApp: <a href="https://wa.me/56900000000" target="_blank">+56 9 0000 0000</a></span>
+        </div>
+        <div class="dato">
+          <span class="dato-icon">📸</span>
+          <span>Instagram: <a href="https://instagram.com/momentosglam" target="_blank">@momentosglam</a></span>
+        </div>
+        <div class="dato">
+          <span class="dato-icon">✉️</span>
+          <span>Email: <a href="mailto:hola@momentosglam.cl">hola@momentosglam.cl</a></span>
+        </div>
+        <div class="dato">
+          <span class="dato-icon">📍</span>
+          <span>Chile — Disponibilidad a coordinar</span>
+        </div>
+      </div>
+    </div>
+    <div class="reveal">
+      <form class="contacto-form" onsubmit="handleForm(event)">
+        <div class="form-group">
+          <label>Nombre</label>
+          <input type="text" placeholder="Tu nombre completo" required>
+        </div>
+        <div class="form-group">
+          <label>WhatsApp / Teléfono</label>
+          <input type="tel" placeholder="+56 9 ..." required>
+        </div>
+        <div class="form-group">
+          <label>Tipo de evento</label>
+          <select required>
+            <option value="" disabled selected>Selecciona el tipo de evento</option>
+            <option>Matrimonio / Boda</option>
+            <option>Cumpleaños</option>
+            <option>Quinceañero / 15 años</option>
+            <option>Baby Shower</option>
+            <option>Graduación</option>
+            <option>Evento corporativo</option>
+            <option>Otro</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Fecha del evento</label>
+          <input type="date" required>
+        </div>
+        <div class="form-group">
+          <label>Servicio de interés</label>
+          <select>
+            <option value="" disabled selected>¿Qué servicio te interesa?</option>
+            <option>Cámara 360°</option>
+            <option>Teléfono vintage</option>
+            <option>Ambos servicios</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Mensaje (opcional)</label>
+          <textarea placeholder="Cuéntanos más sobre tu evento..."></textarea>
+        </div>
+        <button type="submit" class="btn-submit">Enviar cotización →</button>
+      </form>
+
+      <!-- MINI AGENDA EN CONTACTO -->
+      <div class="contacto-agenda-mini">
+        <span class="pago-strip-title">¿Prefieres hablar primero?</span>
+        <p>Agenda una reunión de 15 minutos y resolvemos todo en una llamada rápida.</p>
+        <a href="https://calendar.app.google/pKxpgGgnyPkUzt7L8" target="_blank" class="btn-agendar" style="font-size:0.78rem; padding:0.75rem 1.5rem;">
+          📅 Agendar llamada de 15 min
+        </a>
+        <div class="contacto-pago-mini">
+          <a href="https://mpago.la/2b7THMJ" target="_blank" class="btn-mp" style="font-size:0.78rem; padding:0.75rem 1.5rem; margin-top:0.5rem; align-self:flex-start;">
+            💳 Pagar anticipo — Mercado Pago
+          </a>
+          <p class="pago-nota">🔒 Datos de transferencia bancaria por WhatsApp</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2026 Momentos Glam · Todos los derechos reservados ·
+    <a href="https://instagram.com/momentosglam" target="_blank">Instagram</a>
+    <a href="https://wa.me/56900000000" target="_blank">WhatsApp</a>
+  </p>
+</footer>
+
+<!-- SOCIAL FLOAT -->
+<div class="social-float">
+  <a href="https://wa.me/56900000000" class="social-btn wa" target="_blank" title="WhatsApp">💬</a>
+  <a href="https://instagram.com/momentosglam" class="social-btn ig" target="_blank" title="Instagram">📸</a>
+</div>
+
+<script>
+  // FAQ accordion
+  function toggleFaq(btn) {
+    const respuesta = btn.nextElementSibling;
+    const estaAbierta = btn.classList.contains('abierta');
+    // cerrar todas
+    document.querySelectorAll('.faq-pregunta').forEach(b => {
+      b.classList.remove('abierta');
+      b.nextElementSibling.classList.remove('abierta');
+    });
+    // abrir la clickeada si estaba cerrada
+    if (!estaAbierta) {
+      btn.classList.add('abierta');
+      respuesta.classList.add('abierta');
+    }
+  }
+
+  // Menú mobile
+  function toggleMenu() {
+    document.getElementById('navLinks').classList.toggle('open');
+  }
+
+  // Reveal on scroll
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
+    });
+  }, { threshold: 0.12 });
+  reveals.forEach(r => observer.observe(r));
+
+  // Nav scroll color
+  window.addEventListener('scroll', () => {
+    const nav = document.querySelector('nav');
+    nav.style.background = window.scrollY > 50
+      ? 'rgba(13,12,14,0.97)'
+      : 'rgba(13,12,14,0.85)';
+  });
+
+  // Form submit
+  function handleForm(e) {
+    e.preventDefault();
+    const btn = e.target.querySelector('.btn-submit');
+    btn.textContent = '✓ ¡Mensaje enviado!';
+    btn.style.background = '#4CAF50';
+    setTimeout(() => {
+      btn.textContent = 'Enviar cotización →';
+      btn.style.background = '';
+      e.target.reset();
+    }, 3000);
+  }
+</script>
+</body>
+</html>
